@@ -40,13 +40,13 @@ func writeFile(filename string, content []byte) error {
 func createFolderIfNotExists() {
 	resultsPathEnv := os.Getenv(resultsPathEnvKey)
 	if resultsPathEnv == "" {
-		log.Err(fmt.Errorf("%s is empty, setting it as $(pwd)/reports", resultsPathEnvKey))
+		log.Err(fmt.Errorf("%s is empty, setting it as $(pwd)", resultsPathEnvKey))
 		cwd, err := os.Getwd()
 		if err != nil {
 			panic(fmt.Errorf("cannot get current workdir: %w", err))
 		}
 
-		resultsPathEnv = fmt.Sprintf("%s/reports", cwd)
+		resultsPathEnv = fmt.Sprintf("%s", cwd)
 
 		err = os.Setenv(resultsPathEnvKey, resultsPathEnv)
 		if err != nil {
